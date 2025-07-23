@@ -13,11 +13,14 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 # ---------------------------
 # 基础配置与工具函数
 # ---------------------------
 # 设置 Edge 驱动（webdriver_manager 会自动下载匹配版本）
-service = Service(EdgeChromiumDriverManager().install())
+# service =Service(EdgeChromiumDriverManager().install())
+# 手动设置浏览器驱动
+service = Service(executable_path='E:\project\python\Classin_Video_Downloader_Python\edgedriver_win64\msedgedriver.exe')
 
 def sanitize_filename(name):
     """清理非法文件名字符"""
@@ -168,8 +171,8 @@ def load_courses_from_csv(csv_file):
             dict_reader = csv.DictReader(f, fieldnames=headers)
             for row in dict_reader:
                 course = {
-                    "lesson_id": row.get("课节ID", "").strip(),
-                    "course_id": row.get("课程ID", "").strip(),
+                    "lesson_id": row.get("课堂ID", "").strip(),
+                    "course_id": row.get("班级ID", "").strip(),
                     "lesson_name": row.get("课节名称", "").strip(),
                     "course_name_csv": row.get("课程名称", "").strip(),
                     "start_time": row.get("开课时间", "").strip()
@@ -199,7 +202,7 @@ def download_videos():
     driver = webdriver.Edge(service=service)
     # 先打开首页以建立域名（请根据实际情况修改 URL）
     driver.get("https://www.eeo.cn")
-    cookie_str = ("sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2282022576%22%2C%22first_id%22%3A%2219458a9e671581-01d7f7926fabb86-4c657b58-2073600-19458a9e67221ff%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTk0NThhOWU2NzE1ODEtMDFkN2Y3OTI2ZmFiYjg2LTRjNjU3YjU4LTIwNzM2MDAtMTk0NThhOWU2NzIyMWZmIiwiJGlkZW50aXR5X2xvZ2luX2lkIjoiODIwMjI1NzYifQ%3D%3D%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%2282022576%22%7D%2C%22%24device_id%22%3A%2219458a9e671581-01d7f7926fabb86-4c657b58-2073600-19458a9e67221ff%22%7D; _eeos_uid=82022576; _eeos_useraccount=19502702034; _eeos_userlogo=https%3A%2F%2Fstatic.eeo.cn%2Fimages%2Fuser.png; _eeos_domain=.eeo.cn; _eeos_remember=1; _eeos_traffic=%2FQ%2BNhv7jnH8QLl2PlAgU0FJPNUpqQzSZN1heNySf%2B7CX10fC2E2e9PbOR7UIFkb%2BniBGyfM1m8M%3D; _eeos_sub=1; _eeos_sid=72017310; _eeos_nsid=C0fnLGibET79l3%2BQsdqF0Q%3D%3D; locationArgumentLang=zh-CN; __tk_id=cd0300239c6a51900a2ca3d9670289e0")
+    cookie_str = ("sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2282022576%22%2C%22first_id%22%3A%2219458a9e671581-01d7f7926fabb86-4c657b58-2073600-19458a9e67221ff%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTk0NThhOWU2NzE1ODEtMDFkN2Y3OTI2ZmFiYjg2LTRjNjU3YjU4LTIwNzM2MDAtMTk0NThhOWU2NzIyMWZmIiwiJGlkZW50aXR5X2xvZ2luX2lkIjoiODIwMjI1NzYifQ%3D%3D%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%2282022576%22%7D%2C%22%24device_id%22%3A%2219458a9e671581-01d7f7926fabb86-4c657b58-2073600-19458a9e67221ff%22%7D; locationArgumentLang=zh-CN; _eeos_uid=82022576; _eeos_useraccount=19502702034; _eeos_userlogo=https%3A%2F%2Fstatic.eeo.cn%2Fimages%2Fuser.png; _eeos_domain=.eeo.cn; _eeos_remember=1; _eeos_traffic=%2FQ%2BNhv7jnH8QLl2PlAgU0FJPNUpqQzSZN1heNySf%2B7CX10fC2E2e9G3YV7h8lHrn%2BxcS67A%2ByQo%3D; _eeos_sub=1; _eeos_sid=72017310; _eeos_nsid=C0fnLGibET79l3%2BQsdqF0Q%3D%3D; __tk_id=02a9d1e8f0be97ec3a5d7f8193d22ebd")
 
     cookies = parse_cookie_string(cookie_str)
 
@@ -211,7 +214,7 @@ def download_videos():
     driver.refresh()
     time.sleep(3)
 
-    SAVE_DIR = "./videos"
+    SAVE_DIR = "Y:\\video"
     os.makedirs(SAVE_DIR, exist_ok=True)
     CSV_FILE = "./courses.csv"
     courses = load_courses_from_csv(CSV_FILE)
