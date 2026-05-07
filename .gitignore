@@ -1,0 +1,31 @@
+# Secrets / sessions
+cookies*.json
+cookies*.pkl
+*.pkl
+*.log
+.env
+
+# User data / exports
+videodata/
+处理日志.txt
+
+# Build artifacts
+build/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Drivers (download at runtime)
+msedgedriver.exe
+chromedriver.exe
+edgedriver_win64/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
