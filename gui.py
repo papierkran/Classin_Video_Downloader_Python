@@ -79,8 +79,8 @@ class App:
         self.root = root
         root.title('ClassIn 视频下载器')
         root.configure(bg=BG_COLOR)
-        root.minsize(900, 700)
-        root.geometry('1080x820')
+        root.minsize(960, 680)
+        root.geometry('1050x750')
 
         self.log_q = queue.Queue()
         self.total_items = 0
@@ -89,68 +89,68 @@ class App:
         self._is_downloading = False
         self._check_done_id = None
 
-        main = tk.Frame(root, bg=BG_COLOR, padx=20, pady=16)
+        main = tk.Frame(root, bg=BG_COLOR, padx=16, pady=12)
         main.pack(fill=tk.BOTH, expand=True)
 
         header = tk.Frame(main, bg=BG_COLOR)
-        header.pack(fill=tk.X, pady=(0, 16))
-        tk.Label(header, text='ClassIn 视频下载器', font=('Microsoft YaHei UI', 18, 'bold'),
+        header.pack(fill=tk.X, pady=(0, 10))
+        tk.Label(header, text='ClassIn 视频下载器', font=('Microsoft YaHei UI', 16, 'bold'),
                  fg=ACCENT, bg=BG_COLOR).pack(side=tk.LEFT)
-        tk.Label(header, text='批量下载课堂录播视频', font=('Microsoft YaHei UI', 10),
-                 fg=TEXT_MUTED, bg=BG_COLOR).pack(side=tk.LEFT, padx=(12, 0), pady=4)
+        tk.Label(header, text='批量下载课堂录播视频', font=('Microsoft YaHei UI', 9),
+                 fg=TEXT_MUTED, bg=BG_COLOR).pack(side=tk.LEFT, padx=(10, 0), pady=4)
 
-        config_card = tk.Frame(main, bg=CARD_BG, relief='flat', padx=20, pady=16)
-        config_card.pack(fill=tk.X, pady=(0, 12))
+        config_card = tk.Frame(main, bg=CARD_BG, relief='flat', padx=14, pady=10)
+        config_card.pack(fill=tk.X, pady=(0, 8))
         config_card.config(highlightbackground=BORDER_COLOR, highlightthickness=1)
 
-        _make_label(config_card, '浏览器驱动').grid(row=0, column=0, sticky='w', pady=(0, 6))
-        self.driver_entry = _make_entry(config_card, width=52)
-        self.driver_entry.grid(row=0, column=1, padx=(12, 8), pady=(0, 6), sticky='we')
-        _make_btn(config_card, '浏览', self.browse_driver, style='secondary').grid(row=0, column=2, pady=(0, 6))
+        _make_label(config_card, '浏览器驱动').grid(row=0, column=0, sticky='w', pady=(0, 4))
+        self.driver_entry = _make_entry(config_card, width=50)
+        self.driver_entry.grid(row=0, column=1, padx=(10, 6), pady=(0, 4), sticky='we')
+        _make_btn(config_card, '浏览', self.browse_driver, style='secondary').grid(row=0, column=2, pady=(0, 4))
 
-        _make_label(config_card, '保存目录').grid(row=1, column=0, sticky='w', pady=6)
-        self.save_entry = _make_entry(config_card, width=52)
-        self.save_entry.grid(row=1, column=1, padx=(12, 8), pady=6, sticky='we')
-        _make_btn(config_card, '浏览', self.browse_save, style='secondary').grid(row=1, column=2, pady=6)
+        _make_label(config_card, '保存目录').grid(row=1, column=0, sticky='w', pady=4)
+        self.save_entry = _make_entry(config_card, width=50)
+        self.save_entry.grid(row=1, column=1, padx=(10, 6), pady=4, sticky='we')
+        _make_btn(config_card, '浏览', self.browse_save, style='secondary').grid(row=1, column=2, pady=4)
 
-        _make_label(config_card, '数据文件').grid(row=2, column=0, sticky='w', pady=6)
-        self.csv_entry = _make_entry(config_card, width=52)
-        self.csv_entry.grid(row=2, column=1, padx=(12, 8), pady=6, sticky='we')
-        _make_btn(config_card, '浏览', self.browse_csv, style='secondary').grid(row=2, column=2, pady=6)
+        _make_label(config_card, '数据文件').grid(row=2, column=0, sticky='w', pady=4)
+        self.csv_entry = _make_entry(config_card, width=50)
+        self.csv_entry.grid(row=2, column=1, padx=(10, 6), pady=4, sticky='we')
+        _make_btn(config_card, '浏览', self.browse_csv, style='secondary').grid(row=2, column=2, pady=4)
 
-        _make_label(config_card, 'Cookie').grid(row=3, column=0, sticky='nw', pady=(6, 0))
-        self.cookie_text = tk.Text(config_card, height=4, width=52, font=('Consolas', 9),
+        _make_label(config_card, 'Cookie').grid(row=3, column=0, sticky='nw', pady=(4, 0))
+        self.cookie_text = tk.Text(config_card, height=3, width=50, font=('Consolas', 9),
                                    relief='flat', highlightthickness=1, highlightbackground=BORDER_COLOR,
                                    highlightcolor=ACCENT, bd=0, bg='#fff', fg=TEXT_COLOR,
                                    insertbackground=ACCENT, wrap=tk.WORD)
-        self.cookie_text.grid(row=3, column=1, padx=(12, 8), pady=6, sticky='we')
-        _make_btn(config_card, '获取 Cookie', self.get_cookie, style='secondary').grid(row=3, column=2, pady=6, sticky='n')
+        self.cookie_text.grid(row=3, column=1, padx=(10, 6), pady=4, sticky='we')
+        _make_btn(config_card, '获取Cookie', self.get_cookie, style='secondary').grid(row=3, column=2, pady=4, sticky='n')
 
-        _make_label(config_card, '下载线程数').grid(row=4, column=0, sticky='w', pady=6)
-        self.threads_entry = _make_entry(config_card, width=52)
-        self.threads_entry.grid(row=4, column=1, padx=(12, 8), pady=6, sticky='we')
+        _make_label(config_card, '下载线程数').grid(row=4, column=0, sticky='w', pady=4)
+        self.threads_entry = _make_entry(config_card, width=50)
+        self.threads_entry.grid(row=4, column=1, padx=(10, 6), pady=4, sticky='we')
         self.threads_entry.insert(0, '4')
-        tk.Label(config_card, text='(1-8, 默认4)', fg=TEXT_MUTED, font=('Microsoft YaHei UI', 10)).grid(row=4, column=2, pady=6, sticky='w', padx=8)
-        
+        tk.Label(config_card, text='(1-8)', fg=TEXT_MUTED, font=('Microsoft YaHei UI', 9)).grid(row=4, column=2, pady=4, sticky='w', padx=6)
+
         config_card.columnconfigure(1, weight=1)
 
         action_frame = tk.Frame(main, bg=BG_COLOR)
-        action_frame.pack(fill=tk.X, pady=(0, 12))
+        action_frame.pack(fill=tk.X, pady=(0, 8))
         self.save_btn = _make_btn(action_frame, '保存配置', self.save_config, style='secondary')
-        self.save_btn.pack(side=tk.LEFT, padx=(0, 8))
+        self.save_btn.pack(side=tk.LEFT, padx=(0, 6))
         self.start_btn = _make_btn(action_frame, '开始下载', self.start_download, style='primary')
-        self.start_btn.pack(side=tk.LEFT, padx=(0, 8))
+        self.start_btn.pack(side=tk.LEFT, padx=(0, 6))
         self.pause_btn = _make_btn(action_frame, '暂停', self.toggle_pause, style='secondary')
-        self.pause_btn.pack(side=tk.LEFT, padx=(0, 8))
+        self.pause_btn.pack(side=tk.LEFT, padx=(0, 6))
         self.stop_btn = _make_btn(action_frame, '停止', self.stop_download, style='danger')
         self.stop_btn.pack(side=tk.LEFT)
 
         progress_frame = tk.Frame(main, bg=BG_COLOR)
-        progress_frame.pack(fill=tk.X, pady=(0, 8))
+        progress_frame.pack(fill=tk.X, pady=(0, 6))
         row1 = tk.Frame(progress_frame, bg=BG_COLOR)
         row1.pack(fill=tk.X)
         self.video_progress_label = _make_label(row1, '当前视频: 0% | 0.00 MB/s')
-        self.video_progress_label.pack(side=tk.LEFT, padx=(0, 12))
+        self.video_progress_label.pack(side=tk.LEFT, padx=(0, 10))
         self.video_progress_var = tk.IntVar()
         pb_style = ttk.Style()
         try:
@@ -159,14 +159,14 @@ class App:
         except tk.TclError:
             video_style = 'Horizontal.TProgressbar'
         self.video_progress_bar = ttk.Progressbar(row1, variable=self.video_progress_var, maximum=100,
-                                                  style=video_style, length=400)
+                                                  style=video_style, length=300)
         self.video_progress_bar.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
         row2 = tk.Frame(progress_frame, bg=BG_COLOR)
-        row2.pack(fill=tk.X, pady=(6, 0))
+        row2.pack(fill=tk.X, pady=(4, 0))
         self.total_progress_label = _make_label(row2, '总进度: 0/0 | 成功 0 失败 0')
-        self.total_progress_label.pack(side=tk.LEFT, padx=(0, 12))
-        self.total_canvas = tk.Canvas(row2, height=18, bg=BORDER_COLOR, highlightthickness=0)
+        self.total_progress_label.pack(side=tk.LEFT, padx=(0, 10))
+        self.total_canvas = tk.Canvas(row2, height=14, bg=BORDER_COLOR, highlightthickness=0)
         self.total_canvas.pack(side=tk.LEFT, fill=tk.X, expand=True)
         self.total_canvas.bind('<Configure>', lambda e: self._redraw_total_bar())
         row1.pack_forget()
@@ -176,13 +176,13 @@ class App:
 
         list_frame = tk.Frame(main, bg=BG_COLOR)
         list_frame.pack(fill=tk.BOTH, expand=True)
-        _make_label(list_frame, '任务列表').pack(anchor='w', pady=(0, 6))
+        _make_label(list_frame, '任务列表').pack(anchor='w', pady=(0, 4))
         table_card = tk.Frame(list_frame, bg=CARD_BG, relief='flat')
-        table_card.pack(fill=tk.BOTH, expand=False)
+        table_card.pack(fill=tk.BOTH, expand=True)
         table_card.config(highlightbackground=BORDER_COLOR, highlightthickness=1)
 
         columns = ('course_id', 'lesson_id', 'class_name', 'lesson_name', 'start_time', 'status', 'message')
-        self.tree = ttk.Treeview(table_card, columns=columns, show='headings', height=8)
+        self.tree = ttk.Treeview(table_card, columns=columns, show='headings', height=6)
         self.tree.heading('course_id', text='班级ID')
         self.tree.heading('lesson_id', text='课堂ID')
         self.tree.heading('class_name', text='班级名称')
@@ -190,13 +190,13 @@ class App:
         self.tree.heading('start_time', text='开课时间')
         self.tree.heading('status', text='状态')
         self.tree.heading('message', text='消息')
-        self.tree.column('course_id', width=110, anchor='w')
-        self.tree.column('lesson_id', width=110, anchor='w')
-        self.tree.column('class_name', width=140, anchor='w')
-        self.tree.column('lesson_name', width=140, anchor='w')
-        self.tree.column('start_time', width=150, anchor='w')
-        self.tree.column('status', width=80, anchor='center')
-        self.tree.column('message', width=220, anchor='w')
+        self.tree.column('course_id', width=100, anchor='w')
+        self.tree.column('lesson_id', width=100, anchor='w')
+        self.tree.column('class_name', width=120, anchor='w')
+        self.tree.column('lesson_name', width=120, anchor='w')
+        self.tree.column('start_time', width=130, anchor='w')
+        self.tree.column('status', width=70, anchor='center')
+        self.tree.column('message', width=180, anchor='w')
         vsb = ttk.Scrollbar(table_card, orient='vertical', command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -207,21 +207,21 @@ class App:
         self.tree.tag_configure('failed', background='#F8D7DA')
 
         table_actions = tk.Frame(list_frame, bg=BG_COLOR)
-        table_actions.pack(fill=tk.X, pady=(8, 10))
-        _make_btn(table_actions, '导入 CSV/XLSX', self.import_table_file, style='secondary').pack(side=tk.LEFT, padx=(0, 8))
-        _make_btn(table_actions, '新增行', self.add_row_dialog, style='secondary').pack(side=tk.LEFT, padx=(0, 8))
-        _make_btn(table_actions, '编辑行', self.edit_selected_row_dialog, style='secondary').pack(side=tk.LEFT, padx=(0, 8))
+        table_actions.pack(fill=tk.X, pady=(6, 6))
+        _make_btn(table_actions, '导入CSV/XLSX', self.import_table_file, style='secondary').pack(side=tk.LEFT, padx=(0, 6))
+        _make_btn(table_actions, '新增行', self.add_row_dialog, style='secondary').pack(side=tk.LEFT, padx=(0, 6))
+        _make_btn(table_actions, '编辑行', self.edit_selected_row_dialog, style='secondary').pack(side=tk.LEFT, padx=(0, 6))
         _make_btn(table_actions, '删除行', self.delete_selected_rows, style='danger').pack(side=tk.LEFT)
 
         log_frame = tk.Frame(list_frame, bg=BG_COLOR)
         log_frame.pack(fill=tk.BOTH, expand=True)
-        _make_label(log_frame, '任务日志').pack(anchor='w', pady=(0, 6))
+        _make_label(log_frame, '任务日志').pack(anchor='w', pady=(0, 4))
         log_card = tk.Frame(log_frame, bg=CARD_BG, relief='flat')
         log_card.pack(fill=tk.BOTH, expand=True)
         log_card.config(highlightbackground=BORDER_COLOR, highlightthickness=1)
-        self.log_area = ScrolledText(log_card, height=14, width=80, state='disabled',
+        self.log_area = ScrolledText(log_card, height=8, width=80, state='disabled',
                                      font=('Consolas', 9), bg='#fafafa', fg=TEXT_COLOR,
-                                     relief='flat', padx=12, pady=10, wrap=tk.WORD)
+                                     relief='flat', padx=10, pady=8, wrap=tk.WORD)
         self.log_area.pack(fill=tk.BOTH, expand=True, padx=1, pady=1)
 
         self.load_config()
